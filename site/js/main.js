@@ -96,3 +96,6 @@
     io.observe(canvas);
   } else start();
 })();
+
+// 5. Le curseur-joueur (souris uniquement).
+import('./cursor.js').then((m) => m.startCursor()).catch(() => {});
