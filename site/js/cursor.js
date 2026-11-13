@@ -11,10 +11,10 @@ export function startCursor() {
     .player { position: fixed; left: 0; top: 0; z-index: 9999; pointer-events: none; opacity: 0; transition: opacity .2s; will-change: transform; }
     .player.on { opacity: 1; }
     .player__flip { transition: transform .12s steps(3); }
-    .player__fig { position: absolute; left: -22px; top: 2px; transform-style: preserve-3d; transform: scale(1.5) rotateX(-18deg) rotateY(-32deg); }
+    .player__fig { position: absolute; left: -40px; top: 8px; transform-style: preserve-3d; transform: scale(2.7) rotateX(-18deg) rotateY(-32deg); }
     .player__fig * { position: absolute; transform-style: preserve-3d; }
-    .player__ball { position: absolute; left: -7px; top: -7px; width: 14px; height: 14px; border-radius: 50%;
-      background: radial-gradient(circle at 35% 30%, #fff 0 22%, #ffd1ea 23% 45%, #b7a6ff 46% 70%, #5d2885 71%); box-shadow: 0 0 0 1.5px #1f1140, 0 3px 0 #09061a66; }
+    .player__ball { position: absolute; left: -11px; top: -11px; width: 22px; height: 22px; border-radius: 50%;
+      background: radial-gradient(circle at 50% 50%, #fff 0 22%, transparent 23%), conic-gradient(from 18deg, #ff6fb1 0 60deg, #fff 60deg 120deg, #7a3df0 120deg 180deg, #fff 180deg 240deg, #ff6fb1 240deg 300deg, #7a3df0 300deg); box-shadow: 0 0 0 1.5px #1f1140, 0 3px 0 #09061a66; }
   `;
   document.head.appendChild(css);
 
@@ -41,19 +41,23 @@ export function startCursor() {
   const root = document.createElement('div'); root.className = 'player'; root.setAttribute('aria-hidden', 'true');
   const flip = document.createElement('div'); flip.className = 'player__flip';
   const fig = document.createElement('div'); fig.className = 'player__fig';
-  const SKIN = '#f2c9a5', SHIRT = '#ff5fa8', SHORT = '#5d2885', SOCK = '#f4efff';
+  const SKIN = '#f2c9a5', SHIRT = 'repeating-linear-gradient(90deg,#75aadb 0 1.5px,#ffffff 1.5px 3px)', SHORT = '#14143a', SOCK = '#f4efff', BAND = '#ffffff', HAIR = '#3a2212';
   // Le joueur regarde vers la droite (+x). y = 0 au sol, négatif vers le haut.
   fig.appendChild(part(0, -27, 0, box(7, 7, 7, SKIN)));       // tête
-  fig.appendChild(part(0, -18, 0, box(6, 10, 9, SHIRT)));     // buste
+  fig.appendChild(part(-.4, -30.6, 0, box(7.8, 2.4, 7.8, HAIR)));  // cheveux : le dessus…
+  fig.appendChild(part(-3.9, -23, 0, box(2.6, 13, 7.8, HAIR)));   // …et la longueur dans le dos
+  fig.appendChild(part(0, -18, 0, box(6, 10, 9, SHIRT)));     // buste : rayures ciel et blanc
   fig.appendChild(part(0, -18, -6, box(3, 9, 3, SKIN)));      // bras
   fig.appendChild(part(0, -18, 6, box(3, 9, 3, SKIN)));
-  const leg = (z) => {                                         // jambe articulée à la hanche
+  const leg = (z, bandage) => {                                // jambe articulée à la hanche
     const hip = part(0, -13, z, document.createElement('div'));
-    hip.appendChild(part(0, 3, 0, box(4, 6, 4, SHORT)));
+    hip.appendChild(part(0, 1.5, 0, box(4, 3, 4, SHORT)));
+    hip.appendChild(part(0, 4.5, 0, box(3.4, 3, 3.4, SKIN)));
+    if (bandage) hip.appendChild(part(0, 4.3, 0, box(5.2, 3.6, 5.2, BAND)));   // le gros bandage à la cuisse
     hip.appendChild(part(0, 9.5, 0, box(3.4, 7, 3.4, SOCK)));
     return hip;
   };
-  const legBack = leg(-2.4), legKick = leg(2.4);
+  const legBack = leg(-2.4, false), legKick = leg(2.4, true);
   fig.append(legBack, legKick);
   const ball = document.createElement('div'); ball.className = 'player__ball';
   flip.append(fig, ball); root.appendChild(flip); document.body.appendChild(root);
@@ -81,9 +85,9 @@ export function startCursor() {
     if (calm) return;
     ball.animate([
       { transform: 'translate(0,0) scale(1)' },
-      { transform: 'translate(48px,-46px) scale(.8)', offset: .4 },
-      { transform: 'translate(82px,-30px) scale(.55)', opacity: 1, offset: .7 },
-      { transform: 'translate(96px,4px) scale(.4)', opacity: 0, offset: .9 },
+      { transform: 'translate(80px,-76px) scale(.8)', offset: .4 },
+      { transform: 'translate(136px,-50px) scale(.55)', opacity: 1, offset: .7 },
+      { transform: 'translate(160px,6px) scale(.4)', opacity: 0, offset: .9 },
       { transform: 'translate(0,0) scale(1)', opacity: 0, offset: .91 },
       { transform: 'translate(0,0) scale(1)', opacity: 1 },
     ], { duration: 620, easing: 'linear' });
