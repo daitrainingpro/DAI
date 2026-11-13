@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DAI! Workshops de danse et création</title>
+<meta name="description" content="DAI! organise des workshops de danse (improvisation, contact, pratiques somatiques) et accueille des résidences de création.">
+<meta name="theme-color" content="#090b22">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23090b22'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Impact,Arial Narrow,sans-serif' font-size='40' fill='%23ffe7a3'%3ED!%3C/text%3E%3C/svg%3E">
+<link rel="preload" href="fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#contenu">Aller au contenu</a>
+
+<header class="hero" id="haut">
+  <canvas class="hero__scene" id="scene" aria-hidden="true"></canvas>
+
+  <nav class="nav" aria-label="Navigation principale">
+    <a class="nav__brand" href="#haut">DAI!</a>
+    <ul class="nav__links">
+      <li><a href="#workshops">Workshops</a></li>
+      <li><a href="#creation">Création</a></li>
+      <li><a href="#adherer">Adhérer</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero__body">
+    <h1 class="title3d" id="titre" aria-label="DAI!">
+      <span class="title3d__face" aria-hidden="true">DAI!</span>
+    </h1>
+    <p class="hero__lead">Workshops de danse. Résidences de création.</p>
+    <p class="hero__tags">Improvisation · Contact · Pratiques somatiques</p>
+    <div class="hero__actions">
+      <a class="btn btn--solid" href="#workshops">Voir les workshops 2027</a>
+      <a class="btn btn--ghost" href="#contact">Nous écrire</a>
+    </div>
+  </div>
+</header>
+
+<main id="contenu">
+
+  <section class="band band--intro" aria-labelledby="t-asso">
+    <div class="wrap intro">
+      <h2 id="t-asso" class="h-side">L'association</h2>
+      <div class="intro__text">
+        <p class="big">Danser ensemble plusieurs jours, dans un même lieu. Donner du temps à la création.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--stages" id="workshops" aria-labelledby="t-stages">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="t-stages">Workshops 2027</h2>
+      </div>
+
+      <ol class="cards" id="liste-stages">
+        <li class="card">
+          <p class="card__num">01</p>
+          <h3 class="card__title">Workshop de printemps</h3>
+          <p class="card__when">Mi-avril 2027</p>
+          <p class="card__where">Cabasse, Var</p>
+          <p class="card__what">Improvisation, contact</p>
+          <p class="card__details">En résidence · 20 places</p>
+            <p class="card__status">dates à confirmer</p>
+        </li>
+        <li class="card card--featured">
+          <p class="card__num">02</p>
+          <h3 class="card__title">Workshop avec Otto Ramstad</h3>
+          <p class="card__when">10 – 15 mai 2027</p>
+          <p class="card__where">Cabasse, Var</p>
+          <p class="card__details">6 jours en résidence · 20 places</p>
+          <p class="card__who">Avec Otto Ramstad</p>
+          <p class="card__status">inscriptions bientôt</p>
+        </li>
+        <li class="card">
+          <p class="card__num">03</p>
+          <h3 class="card__title">Workshop d'automne</h3>
+          <p class="card__when">Septembre – octobre 2027</p>
+          <p class="card__where">Lieu à préciser</p>
+          <p class="card__what">Programme en préparation</p>
+          <p class="card__details">20 places</p>
+            <p class="card__status">en préparation</p>
+        </li>
+      </ol>
+
+      <p class="stages__foot">Inscriptions bientôt · <a href="mailto:contact@dai.training">contact@dai.training</a></p>
+    </div>
+  </section>
+
+  <section class="band band--creation" id="creation" aria-labelledby="t-creation">
+    <div class="wrap creation">
+      <div>
+        <h2 id="t-creation">Création</h2>
+      </div>
+      <article class="project">
+        <p class="project__label">Résidence en cours</p>
+        <h3 class="project__title">Foot</h3>
+        <p>Strasbourg · 23 – 27 novembre 2026</p>
+      </article>
+    </div>
+
+    <div class="wrap game" id="jeu">
+      <div class="game__head">
+        <h3 class="game__title">Tir au but</h3>
+        <p class="game__score">Buts&nbsp;: <span id="buts">0</span> sur <span id="tirs">0</span> tirs</p>
+      </div>
+      <canvas class="game__field" id="terrain" width="720" height="420" tabindex="0" role="img"
+        aria-label="Mini-jeu de tir au but. Cliquez dans la cage pour tirer. Au clavier : flèches pour viser, Espace pour tirer."></canvas>
+      <p class="game__help">Vise, clique. Au clavier : flèches + Espace.</p>
+      <p class="visually-hidden" id="jeu-annonce" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section class="band band--join" id="adherer" aria-labelledby="t-adherer">
+    <div class="wrap join">
+      <h2 id="t-adherer">Adhérer</h2>
+      <div class="join__price" aria-label="5 euros par an">
+        <span class="join__amount">5&nbsp;€</span>
+        <span class="join__unit">par année civile</span>
+      </div>
+      <div class="join__text">
+        <p>Pour participer aux workshops. Valable du 1<sup>er</sup> janvier au 31 décembre.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--contact" id="contact" aria-labelledby="t-contact">
+    <div class="wrap contact">
+      <h2 id="t-contact">Contact</h2>
+      <p class="contact__mail"><a href="mailto:contact@dai.training">contact@dai.training</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <p class="foot__brand">DAI!</p>
+    <p>Association loi 1901 · Paris</p>
+    <p><a href="#haut">Retour en haut</a></p>
+  </div>
+</footer>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

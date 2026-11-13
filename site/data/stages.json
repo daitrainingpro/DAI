@@ -1,0 +1,41 @@
+{
+  "_aide": "Un bloc par workshop. \"vedette\": true met la carte en avant. Pour ouvrir les inscriptions : \"statut\": \"ouvert\" et le lien HelloAsso dans \"inscription\".",
+  "stages": [
+    {
+      "numero": "01",
+      "titre": "Workshop de printemps",
+      "quand": "Mi-avril 2027",
+      "lieu": "Cabasse, Var",
+      "pratiques": "Improvisation, contact",
+      "details": "En résidence · 20 places",
+      "intervenant": "",
+      "statut": "dates à confirmer",
+      "inscription": "",
+      "vedette": false
+    },
+    {
+      "numero": "02",
+      "titre": "Workshop avec Otto Ramstad",
+      "quand": "10 – 15 mai 2027",
+      "lieu": "Cabasse, Var",
+      "pratiques": "",
+      "details": "6 jours en résidence · 20 places",
+      "intervenant": "Avec Otto Ramstad",
+      "statut": "inscriptions bientôt",
+      "inscription": "",
+      "vedette": true
+    },
+    {
+      "numero": "03",
+      "titre": "Workshop d'automne",
+      "quand": "Septembre – octobre 2027",
+      "lieu": "Lieu à préciser",
+      "pratiques": "Programme en préparation",
+      "details": "20 places",
+      "intervenant": "",
+      "statut": "en préparation",
+      "inscription": "",
+      "vedette": false
+    }
+  ]
+}
