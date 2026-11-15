@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DAI! Labo 3D</title>
+<meta name="description" content="Propositions 3D pour le site de DAI! : nébuleuse, tir au but, documents dans l'espace.">
+<meta name="theme-color" content="#090b22">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+  /* Labo : trois scènes plein écran, le texte par-dessus. */
+  body { background: var(--night); }
+  .lab-bar { position: fixed; inset: 0 0 auto 0; z-index: 20; display: flex; gap: 12px; align-items: center; justify-content: space-between; padding: 12px clamp(14px, 4vw, 36px); font-family: var(--mono); font-size: 13px; letter-spacing: .04em; text-transform: uppercase; }
+  .lab-bar a { color: var(--pearl); text-decoration: none; }
+  .lab-bar > a { font-family: var(--display); font-size: 24px; letter-spacing: 0; }
+  .lab-bar nav { display: flex; gap: clamp(10px, 2.4vw, 22px); flex-wrap: wrap; justify-content: flex-end; align-items: center; }
+  .lab-btn { font: inherit; text-transform: uppercase; letter-spacing: .04em; color: var(--night); background: var(--moon); border: 0; padding: 8px 12px; cursor: pointer; }
+  .lab-btn--ghost { background: #09061a99; color: var(--pearl); box-shadow: inset 0 0 0 1px #f4efff66; }
+  .lab-btn:focus-visible, .lab-bar a:focus-visible { outline: 2px solid var(--moon); outline-offset: 3px; }
+  .lab-scene { position: relative; height: 100vh; height: 100svh; min-height: 540px; overflow: hidden; border-bottom: 1px solid #f4efff1f; }
+  .lab-scene canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: pan-y; outline: none; }
+  .lab-scene canvas:focus-visible { box-shadow: inset 0 0 0 3px var(--moon); }
+  .lab-text { position: absolute; left: clamp(14px, 4vw, 36px); bottom: clamp(18px, 5vh, 44px); right: clamp(14px, 4vw, 36px); pointer-events: none; }
+  .lab-num { font-family: var(--mono); font-size: 13px; letter-spacing: .08em; color: var(--moon); }
+  .lab-text h1, .lab-text h2 { font-family: var(--display); font-weight: 400; font-size: clamp(40px, 9vw, 104px); line-height: .92; text-transform: uppercase; color: var(--pearl); margin: 6px 0 10px; text-shadow: .04em .04em 0 var(--ember), .08em .08em 0 #5d2885; }
+  .lab-text p { font-family: var(--mono); font-size: 13px; color: var(--pearl); max-width: 46ch; margin: 0; background: #09061a99; padding: 6px 8px; display: inline-block; }
+  .lab-tag { position: absolute; z-index: 5; transform: translate(-50%, -160%); font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--night); background: var(--moon); padding: 4px 8px; pointer-events: none; white-space: nowrap; }
+  .lab-hud { position: absolute; top: 64px; right: clamp(14px, 4vw, 36px); font-family: var(--mono); font-size: 15px; color: var(--moon); background: #09061a99; padding: 6px 10px; }
+  .lab-shout { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; font-family: var(--display); font-size: clamp(56px, 16vw, 190px); color: var(--pearl); text-shadow: .04em .04em 0 var(--ember), .08em .08em 0 #5d2885; text-transform: uppercase; }
+  .lab-arrows { position: absolute; top: 64px; right: clamp(14px, 4vw, 36px); display: flex; gap: 8px; }
+  .lab-panel { position: absolute; z-index: 6; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(440px, calc(100% - 28px)); background: #0d0a2cf2; box-shadow: inset 0 0 0 1px #f4efff55, 10px 10px 0 #09061a99; padding: 22px; color: var(--pearl); }
+  .lab-panel small { font-family: var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--moon); }
+  .lab-panel h3 { font-family: var(--display); font-weight: 400; font-size: 44px; line-height: 1; text-transform: uppercase; margin: 8px 0 10px; }
+  .lab-panel p { margin: 0 0 16px; line-height: 1.5; }
+  .lab-foot { padding: 28px clamp(14px, 4vw, 36px) 40px; font-family: var(--mono); font-size: 13px; color: var(--mist); }
+  .lab-foot a { color: var(--pearl); }
+  @media (max-width: 700px) { .lab-hud, .lab-arrows { top: 104px; } }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<header class="lab-bar">
+  <a href="../">DAI!</a>
+  <nav aria-label="Labo">
+    <a href="#nebuleuse">Nébuleuse</a>
+    <a href="#tir">Tir au but</a>
+    <a href="#docs">Documents</a>
+    <button class="lab-btn lab-btn--ghost" id="pixel" type="button" aria-pressed="true">Pixel : oui</button>
+  </nav>
+</header>
+
+<main>
+  <section class="lab-scene" id="nebuleuse">
+    <canvas id="c-nebula" aria-label="Nébuleuse en 3D avec les objets de la création Foot : ballon, cage, attaquant, bandage, lune"></canvas>
+    <div class="lab-tag" id="tag" hidden></div>
+    <div class="lab-text">
+      <span class="lab-num">Proposition 01</span>
+      <h1>Nébuleuse</h1>
+      <p>Glisse pour tourner. Survole un objet, clique dessus.</p>
+    </div>
+  </section>
+
+  <section class="lab-scene" id="tir">
+    <canvas id="c-shot" tabindex="0" aria-label="Tir au but en 3D. Vise avec la souris ou les flèches, tire avec un clic ou Espace."></canvas>
+    <div class="lab-hud" id="score" aria-live="polite">0 but · 0 tir</div>
+    <div class="lab-shout" id="shout" aria-live="assertive"></div>
+    <div class="lab-text">
+      <span class="lab-num">Proposition 02</span>
+      <h2>Tir au but</h2>
+      <p>Vise, clique. Au clavier : flèches + Espace.</p>
+    </div>
+  </section>
+
+  <section class="lab-scene" id="docs">
+    <canvas id="c-docs" tabindex="0" aria-label="Documents présentés en cercle dans l'espace. Flèches gauche et droite pour tourner, Entrée pour ouvrir."></canvas>
+    <div class="lab-arrows">
+      <button class="lab-btn lab-btn--ghost" id="prev" type="button" aria-label="Document précédent">←</button>
+      <button class="lab-btn lab-btn--ghost" id="next" type="button" aria-label="Document suivant">→</button>
+    </div>
+    <div class="lab-panel" id="panel" role="dialog" aria-labelledby="panel-title" hidden>
+      <small id="panel-type"></small>
+      <h3 id="panel-title"></h3>
+      <p id="panel-text"></p>
+      <button class="lab-btn" id="panel-close" type="button">Fermer</button>
+    </div>
+    <div class="lab-text">
+      <span class="lab-num">Proposition 03</span>
+      <h2>Documents</h2>
+      <p>Glisse ou utilise les flèches. Clique la carte de face pour l'ouvrir. Contenus d'exemple.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="lab-foot">Labo 3D · essais pour <a href="../">dai.training</a></footer>
+<script type="module" src="lab.js"></script>
+</body>
+</html>
